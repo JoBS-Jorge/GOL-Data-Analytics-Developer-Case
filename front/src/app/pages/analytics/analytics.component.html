@@ -1,0 +1,20 @@
+<div class="content-wrapper">
+  <div class="charts-container">
+    <app-bar-chart
+      [chartData]="chartDataDepartures" 
+      [title]="'Partidas de Passageiros'">
+    </app-bar-chart>
+    
+    <app-bar-chart
+      [chartData]="chartDataArrivals" 
+      [title]="'Chegadas de Passageiros'">
+    </app-bar-chart>
+    
+    <app-bar-chart
+      [chartData]="chartDataByRoute" 
+      [title]="'Número de passageiros por rota'">
+    </app-bar-chart>
+  </div>
+
+  <app-passenger-route-table></app-passenger-route-table>
+</div>

@@ -1,0 +1,89 @@
+<div class="modal" *ngIf="visible">
+    <div class="modal-content">
+      <h2>Cadastrar Reserva</h2>
+  
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <input type="text" formControlName="first_name" placeholder="Nome" />
+        <div *ngIf="form.get('first_name')?.invalid && form.get('first_name')?.touched" style="color: red;">Nome é obrigatório</div>
+
+        <input type="text" formControlName="last_name" placeholder="Sobrenome" />
+        <div *ngIf="form.get('last_name')?.invalid && form.get('last_name')?.touched" style="color: red;">Sobrenome é obrigatório</div>
+
+        <label>Data de nascimento</label>
+        <input type="date" formControlName="birthday" />
+        <div *ngIf="form.get('birthday')?.invalid && form.get('birthday')?.touched" style="color: red;">
+          Data de nascimento é obrigatória
+        </div>
+
+        <input type="text" formControlName="document" placeholder="Documento" />
+        <div *ngIf="form.get('document')?.invalid && form.get('document')?.touched" style="color: red;">Documento é obrigatório</div>
+
+        <br/>
+        <label>Data de partida</label>
+          <input type="date" formControlName="departure_date" />
+          <div *ngIf="form.get('departure_date')?.invalid && form.get('departure_date')?.touched" style="color: red;">
+            Data de partida é obrigatória
+          </div>
+
+          <input
+            type="text"
+            formControlName="departure_iata"
+            placeholder="Local de Partida"
+            (input)="filterAirports(form.get('departure_iata')?.value, 'departure')"
+            list="departure-airports"
+          />
+          <datalist id="departure-airports">
+            <option *ngFor="let airport of filteredDepartureAirports" [value]="airport.code">
+              {{ airport.name }}
+            </option>
+          </datalist>
+          <div *ngIf="form.get('departure_iata')?.invalid && form.get('departure_iata')?.touched" style="color: red;">
+            Local de partida é obrigatório
+          </div>
+
+          <br/>
+
+          <label>Data de chegada</label>
+            <input type="date" formControlName="arrival_date" />
+            <div *ngIf="form.get('arrival_date')?.invalid && form.get('arrival_date')?.touched" style="color: red;">
+              Data de chegada é obrigatória
+            </div>
+
+            <input
+              type="text"
+              formControlName="arrival_iata"
+              placeholder="Local de Chegada"
+              (input)="filterAirports(form.get('arrival_iata')?.value, 'arrival')"
+              list="arrival-airports"
+            />
+            <datalist id="arrival-airports">
+              <option *ngFor="let airport of filteredArrivalAirports" [value]="airport.code">
+                {{ airport.name }}
+              </option>
+            </datalist>
+            <div *ngIf="form.get('arrival_iata')?.invalid && form.get('arrival_iata')?.touched" style="color: red;">
+              Local de chegada é obrigatório
+            </div>
+  
+        <div class="buttons">
+          <button mat-raised-button color="primary" type="submit">
+            <span class="material-symbols-outlined button-icon">check_circle</span>
+            Cadastrar Reserva
+          </button>
+            <app-standard-button
+                [outlined]="true"
+                [label]="'Limpar dados'"
+                [icon]="'cleaning_services'"
+                (click)="reset()">
+            </app-standard-button>
+            <app-standard-button
+                [outlined]="true"
+                [label]="'Fechar'"
+                [icon]="'cancel'"
+                (click)="close.emit()">
+            </app-standard-button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

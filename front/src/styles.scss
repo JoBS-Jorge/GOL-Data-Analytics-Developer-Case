@@ -1,0 +1,43 @@
+/* Fonte Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Paleta de cores em tons de laranja */
+:root {
+  --color-primary: #fe5e00;
+  --color-primary-light: #ff710f;
+  --color-primary-dark: #C43E00;
+  --color-primary-disable: #9a9a9a;
+
+  --color-accent: #FFB74D;
+  --color-background: #ffffff;
+  --color-background-gray: #f1f1f1;
+  --color-background-dark: #2c2c2c;
+  --color-text-dark: #000000;
+  --color-text-white: #ffffff;
+}
+
+/* Estilos globais */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+a {
+  text-decoration: none;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body.high-contrast {
+  background-color: #2b2b2b;
+  
+  h3 {
+    color: white;
+  }
+}
+
+

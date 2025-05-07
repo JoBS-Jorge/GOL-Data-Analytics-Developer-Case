@@ -1,0 +1,17 @@
+<div class="custom-search">
+    <label for="searchInput">
+      <i class="material-icons">search</i>
+      <span>Pesquisar</span>
+    </label>
+    <input
+      id="searchInput"
+      type="text"
+      [(ngModel)]="searchValue"
+      (input)="onInputChange()"
+      placeholder="Nome, Sobrenome ou Documento"
+    />
+    <button *ngIf="searchValue" (click)="clear()" aria-label="Limpar">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+  

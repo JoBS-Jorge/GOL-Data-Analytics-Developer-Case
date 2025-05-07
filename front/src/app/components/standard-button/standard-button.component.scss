@@ -1,0 +1,52 @@
+// Estilos gerais dos botões Material
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  font-weight: 500;
+}
+
+// Botão principal (preenchido)
+.mat-mdc-raised-button {
+  background-color: var(--color-primary-light) !important;
+  color: var(--color-text-white) !important;
+
+  &:hover {
+    background-color: var(--color-primary-dark) !important;
+  }
+
+  &:disabled {
+    background-color: var(--color-primary-disable) !important;
+    color: var(--color-text-white) !important;
+    cursor: not-allowed;
+  }
+}
+
+// Botão outlined
+.mat-mdc-outlined-button {
+  background-color: var(--color-background) !important;
+  border: 2px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+
+  &:hover {
+    background-color: var(--color-primary-dark) !important;
+    color: var(--color-text-white) !important;
+  }
+
+  &:disabled {
+    border-color: var(--color-primary-disable) !important;
+    color: var(--color-primary-disable) !important;
+    cursor: not-allowed;
+  }
+}
+
+// Ícone opcional
+.button-icon {
+  margin-right: 8px;
+  font-size: 18px;
+  vertical-align: middle;
+}

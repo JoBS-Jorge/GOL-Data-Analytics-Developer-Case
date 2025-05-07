@@ -1,0 +1,32 @@
+<header class="header-container">
+    <div class="header-content">
+      <div class="header-tools">
+        <div class="header-inner">
+            <span>
+              <a href="https://www.voegol.com.br/acessibilidade">Acessibilidade</a>
+            </span>
+            <div class="contrast-container">
+              <span class="contrast-text">Contraste</span>
+              <label class="switch">
+                <input type="checkbox" (change)="toggleContrast()" [checked]="isHighContrast" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+        </div>
+      </div>
+      <div class="header-voegol">
+        <div class="header-inner">
+            <img
+              src="https://www.voegol.com.br/themes/custom/voegol/images/logos/gol-logo-mobile.png"
+              alt="Logo da Gol"
+            />
+            <div class="header-inner-pages">
+                <a routerLink="/voegol/passengers-reservations" routerLinkActive="active-link">Passageiros e Reservas</a>
+                <span> | </span>
+                <a routerLink="/voegol/analytics" routerLinkActive="active-link">Dashboard</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  

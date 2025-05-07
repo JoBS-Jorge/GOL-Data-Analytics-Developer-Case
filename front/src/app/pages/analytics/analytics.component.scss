@@ -1,0 +1,18 @@
+.content-wrapper {
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  
+  .charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .charts-container app-bar-chart {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 400px;
+  }
+  

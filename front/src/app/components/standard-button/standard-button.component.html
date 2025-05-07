@@ -1,0 +1,21 @@
+<ng-container *ngIf="outlined; else normalButton">
+    <button
+      mat-stroked-button
+      [disabled]="disabled"
+      [type]="type ||'button'"
+      (click)="type !== 'submit' && handleClick()">
+      <span *ngIf="icon" class="material-symbols-outlined button-icon">{{ icon }}</span>
+      {{ label }}
+    </button>
+  </ng-container>
+  
+  <ng-template #normalButton>
+    <button
+      mat-raised-button
+      [disabled]="disabled"
+      [type]="type ||'button'"
+      (click)="type !== 'submit' && handleClick()">
+      <span *ngIf="icon" class="material-symbols-outlined button-icon">{{ icon }}</span>
+      {{ label }}
+    </button>
+  </ng-template>  

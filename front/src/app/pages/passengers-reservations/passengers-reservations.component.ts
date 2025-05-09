@@ -131,11 +131,9 @@ export class PassengersReservationsComponent implements OnInit {
         }
       });
   
-      // limpar o input para permitir reenvio do mesmo arquivo
       input.value = '';
     }
   }
-  
   
   
   onDownloadClick(): void {

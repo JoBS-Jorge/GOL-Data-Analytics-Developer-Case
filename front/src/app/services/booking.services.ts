@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BookingService {
@@ -76,6 +77,19 @@ export class BookingService {
     });
   }
 
+  uploadBookingsfile(file: File): Observable<{ rows: number }> {
+    const formData = new FormData();
+    formData.append('content', file, file.name);
+  
+    const token = this.getEncryptedToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  
+    const url = 'http://localhost:8000/api/v1/booking/file/upload';
+    return this.http.post<{ rows: number }>(url, formData, { headers });
+  }
+  
   /* Métodos utilizados na tela analytics */
   /* #################################### */
 
@@ -113,5 +127,6 @@ export class BookingService {
     })
     const url = 'http://localhost:8000/api/v1/dashboard/data';
     return this.http.get<any>(url, { headers })
-  } 
+  }
+
 }

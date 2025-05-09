@@ -1,0 +1,65 @@
+<!-- Busca ativa -->
+<div class="search-container">
+    <app-reservations-search (search)="applyFilter($event)"></app-reservations-search>
+</div>
+  
+<div class="table-container mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" matSort aria-label="Tabela de reservas">
+  
+        <!-- Colunas dinâmicas -->
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
+          <th mat-header-cell *matHeaderCellDef>
+            <ng-container *ngIf="column.sortable; else noSort">
+              <span [mat-sort-header]="column.key">{{ column.label }}</span>
+            </ng-container>
+            <ng-template #noSort>
+              <span>{{ column.label }}</span>
+            </ng-template>
+          </th>
+      
+          <td mat-cell *matCellDef="let row" [attr.data-label]="column.label || ''">
+            <ng-container [ngSwitch]="column.type" >
+              <!-- Caso especial para campo 'dates' -->
+              <span  *ngSwitchCase="'dates'" >
+                {{ row['departure_date'] | date: 'shortDate' }} → {{ row['arrival_date'] | date: 'shortDate' }}
+              </span>
+      
+              <span *ngSwitchCase="'route'">
+                {{ row['departure_iata'] }} → {{ row['arrival_iata'] }}
+              </span>
+      
+              <!-- Caso de data única -->
+              <span *ngSwitchCase="'date'">
+                {{ row[column.key] | date: 'shortDate' }}
+              </span>
+      
+              <!-- Padrão -->
+              <span *ngSwitchDefault>
+                {{ row[column.key] }}
+              </span>
+            </ng-container>
+          </td>
+        </ng-container>
+      
+        <!-- Coluna de ações -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Ações</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" aria-label="Editar" (click)="onEdit(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="Excluir" (click)="onDelete(row)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Paginação">
+      </mat-paginator>
+</div>
+  
+  

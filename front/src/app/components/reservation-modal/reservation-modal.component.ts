@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -7,11 +7,12 @@ import { StandardButtonComponent } from "../standard-button/standard-button.comp
 import { BookingService } from '../../services/booking.services';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AIRPORTS } from '../../utils/airports';
+import { CustomSnackBarComponent } from '../custom-snack-bar/custom-snack-bar.component';
 
 @Component({
   selector: 'app-reservation-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatDialogModule, MatButtonModule, StandardButtonComponent, ReactiveFormsModule, MatSnackBarModule],
+  imports: [CommonModule, FormsModule, MatDialogModule, MatButtonModule, StandardButtonComponent, ReactiveFormsModule, MatSnackBarModule ],
   templateUrl: './reservation-modal.component.html',
   styleUrl: './reservation-modal.component.scss'
 })
@@ -43,6 +44,13 @@ export class ReservationModalComponent implements OnInit{
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['visible'] && changes['visible'].currentValue) {
+      // Quando a modal for aberta (visible == true), reseta os dados
+      this.reset();
+    }
+  }
+
   filterAirports(search: string, type: 'departure' | 'arrival') {
     const filtered = this.airports.filter(airport =>
       airport.code.toLowerCase().includes(search.toLowerCase()) ||
@@ -63,18 +71,28 @@ export class ReservationModalComponent implements OnInit{
   
     this.bookingService.createBooking(this.form.value).subscribe({
       next: () => {
-        this.snackBar.open('Reserva cadastrada com sucesso!', 'Fechar', {
-          duration: 3000,
-          panelClass: ['snackbar-success']
+        this.snackBar.openFromComponent(CustomSnackBarComponent, {
+          data: {
+            message: 'Reserva cadastrada com sucesso!',
+            type: 'success'
+          },
+          duration: 6000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
         });
         this.reservationCreated.emit();
         this.close.emit();
       },
       error: (err) => {
         console.error('Erro ao cadastrar reserva: ', err)
-        this.snackBar.open('Erro ao cadastrar reserva. Tente novamente.', 'Fechar', {
-          duration: 3000,
-          panelClass: ['snackbar-error']
+        this.snackBar.openFromComponent(CustomSnackBarComponent, {
+          data: {
+            message: 'Erro ao cadastrar reserva. Tente novamente.',
+            type: 'error'
+          },
+          duration: 6000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
         });
       }
     });

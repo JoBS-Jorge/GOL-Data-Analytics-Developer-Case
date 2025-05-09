@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { BookingService } from '../../services/booking.services';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-passenger-route-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule],
   templateUrl: './passenger-route-table.component.html',
   styleUrls: ['./passenger-route-table.component.scss']
 })
@@ -16,6 +17,7 @@ export class PassengerRouteTableComponent implements OnInit {
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private bookingService: BookingService) {}
 
@@ -35,5 +37,6 @@ export class PassengerRouteTableComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }

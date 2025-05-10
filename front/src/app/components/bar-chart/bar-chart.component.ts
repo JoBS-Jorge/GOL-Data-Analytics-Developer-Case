@@ -53,7 +53,6 @@ export class BarChartComponent implements OnChanges {
     this.barChartData.labels = this.chartData.map(item => item.category);
     this.barChartData.datasets[0].data = this.chartData.map(item => item.value);
 
-    // Atualiza o gráfico
     this.chart?.update();
   }
 }

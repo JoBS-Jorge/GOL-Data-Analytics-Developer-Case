@@ -24,15 +24,21 @@ export class PassengerRouteTableComponent implements OnInit {
   ngOnInit(): void {
     this.bookingService.getPassengerTrafficByRoute().subscribe({
       next: (response) => {
-        this.dataSource.data = response.data.map((item: { date: string | number | Date; }) => ({
+        this.dataSource.data = response.data.map((item: { date: string | number | Date, iatapair: string }) => ({
           ...item,
-          date: new Date(item.date)
+          date: this.isValidDate(item.date) ? new Date(item.date) : null,
+          iatapair: item.iatapair || 'N/A'
         }));
       },
       error: (err) => {
         console.error('Erro ao carregar dados:', err);
       }
     });
+  }
+
+  private isValidDate(date: string | number | Date): boolean {
+    const parsedDate = new Date(date);
+    return !isNaN(parsedDate.getTime()); // Verifica se a data é válida
   }
 
   ngAfterViewInit() {

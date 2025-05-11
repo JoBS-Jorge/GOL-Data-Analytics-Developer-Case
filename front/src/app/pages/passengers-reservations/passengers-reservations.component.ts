@@ -152,9 +152,9 @@ export class PassengersReservationsComponent implements OnInit {
 
   // Métodos dos Actions buttons
   onEdit() {
-    console.log('não implmentado')
+    console.log('não implementado')
   }
   onDelete() {
-    console.log('não implmentado')
+    console.log('não implementado')
   }
 }
